@@ -1,1 +1,1 @@
-# kjfsm-template-repo
+# react-pages

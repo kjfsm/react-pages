@@ -30628,7 +30628,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var react_1 = __importStar(require("react"));
 
-var App = function App(props) {
+var App = function App() {
   var _a = react_1.useState(""),
       text = _a[0],
       setText = _a[1];
@@ -30637,19 +30637,39 @@ var App = function App(props) {
       clear = _b[0],
       setClear = _b[1];
 
+  var _c = react_1.useState(["あ", "み", "は", "む"]),
+      randomData = _c[0],
+      setRandomData = _c[1];
+
+  var _d = react_1.useState("あみはむ"),
+      clearCheck = _d[0],
+      setClearCheck = _d[1];
+
+  var _e = react_1.useState("はむぅ！"),
+      clearText = _e[0],
+      setClearText = _e[1];
+
+  var _f = react_1.useState({
+    randomData: randomData,
+    clearCheck: clearCheck,
+    clearText: clearText
+  }),
+      gameState = _f[0],
+      setGameState = _f[1];
+
   var getRandom = function getRandom(data) {
     var index = Math.floor(Math.random() * Math.floor(data.length));
     return data[index];
   };
 
   var handleClick = function handleClick() {
-    if (text.endsWith(props.clearCheck)) {
+    if (text.endsWith(gameState.clearCheck)) {
       setClear(true);
-      setText(text + " " + props.clearText);
+      setText(text + " " + gameState.clearText);
       return;
     }
 
-    setText(text + getRandom(props.randomData));
+    setText(text + getRandom(gameState.randomData));
   };
 
   var handleReset = function handleReset() {
@@ -30657,10 +30677,38 @@ var App = function App(props) {
     setClear(false);
   };
 
-  return react_1.default.createElement(react_1.default.Fragment, null, react_1.default.createElement("div", null, react_1.default.createElement("button", {
+  return react_1.default.createElement(react_1.default.Fragment, null, react_1.default.createElement("div", null, "\u51FA\u3066\u304F\u308B\u6587\u5B57(\u30B3\u30F3\u30DE\u533A\u5207\u308A)", react_1.default.createElement("br", null), react_1.default.createElement("input", {
+    type: "text",
+    value: randomData,
+    onChange: function onChange(event) {
+      return setRandomData(event.target.value.split(","));
+    }
+  })), react_1.default.createElement("div", null, "\u5F53\u305F\u308A", react_1.default.createElement("br", null), react_1.default.createElement("input", {
+    type: "text",
+    value: clearCheck,
+    onChange: function onChange(event) {
+      return setClearCheck(event.target.value);
+    }
+  })), react_1.default.createElement("div", null, "\u5F53\u305F\u308A\u306E\u3068\u304D\u306B\u51FA\u308B\u6587\u5B57", react_1.default.createElement("br", null), react_1.default.createElement("input", {
+    type: "text",
+    value: clearText,
+    onChange: function onChange(event) {
+      return setClearText(event.target.value);
+    }
+  })), react_1.default.createElement("div", null, react_1.default.createElement("button", {
+    onClick: function onClick() {
+      setGameState({
+        randomData: randomData,
+        clearCheck: clearCheck,
+        clearText: clearText
+      });
+      setText("");
+      setClear(false);
+    }
+  }, "\u6C7A\u5B9A")), react_1.default.createElement("div", null, react_1.default.createElement("button", {
     onClick: handleClick,
     disabled: clear
-  }, props.clearCheck + "ボタン"), react_1.default.createElement("button", {
+  }, gameState.clearCheck + "ボタン"), react_1.default.createElement("button", {
     onClick: handleReset
   }, "\u30EA\u30BB\u30C3\u30C8"), react_1.default.createElement("div", null, text)));
 };
@@ -30695,11 +30743,7 @@ var react_dom_1 = __importDefault(require("react-dom"));
 
 var App_1 = __importDefault(require("./App"));
 
-react_dom_1.default.render(React.createElement(App_1.default, {
-  randomData: ["あ", "み", "は", "む"],
-  clearCheck: "あみはむ",
-  clearText: "はむぅ！"
-}), document.getElementById("root"));
+react_dom_1.default.render(React.createElement(App_1.default, null), document.getElementById("root"));
 },{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./App":"App.tsx"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -30728,7 +30772,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43497" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43133" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
