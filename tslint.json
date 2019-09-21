@@ -1,0 +1,16 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+      "tslint:latest"
+    ],
+    "jsRules": {},
+    "rules": {
+      "interface-name":false,
+      "object-literal-sort-keys":false
+    },
+    "rulesDirectory": [],
+    "exclude": [
+      "node_modules"
+    ]
+  }
+  
