@@ -72,13 +72,9 @@ const App: React.FC = () => {
         <button onClick={handleClick} disabled={clear} >{gameState.clearCheck + "ボタン"}</button>
         <button onClick={handleReset} >リセット</button>
         <div>{text}</div>
-        {
-          clear ?
-          <TwitterShareButton　title={text} url={window.location.origin}>
-            <TwitterIcon size={32} round />
-          </TwitterShareButton>
-          : null
-        }
+        <TwitterShareButton　title={text} url={window.location.origin} disabled={!clear}>
+          <TwitterIcon size={32} round />
+        </TwitterShareButton>
       </div>
     </>
   );
