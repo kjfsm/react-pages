@@ -4,8 +4,9 @@ const App: React.FC = () => {
   const [text, setText] = useState("");
   const [clear, setClear] = useState(false);
 
-  const [randomData, setRandomData] = useState(["あ", "み", "は", "む"]);
-  const [clearCheck, setClearCheck] = useState("あみはむ");
+  const initialData = "あみはむ";
+  const [randomData, setRandomData] = useState(initialData.split(""));
+  const [clearCheck, setClearCheck] = useState(initialData);
   const [clearText, setClearText] = useState("はむぅ！");
   const [gameState, setGameState] = useState({
     randomData,
@@ -81,7 +82,7 @@ const App: React.FC = () => {
         </button>
       </div>
       <div>
-        <button onClick={handleClick} disabled={clear} >{gameState.clearCheck + "ボタン"}</button>
+        <button onClick={handleClick} disabled={clear} >{`${gameState.clearCheck}ボタン`}</button>
         <button onClick={handle10Click} disabled={clear} >{`${gameState.clearCheck}10連ボタン`}</button>
         <button onClick={handleReset} >リセット</button>
         <div>{text}</div>
