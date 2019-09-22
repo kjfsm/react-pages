@@ -27,6 +27,19 @@ const App: React.FC = () => {
     setText(text + getRandom(gameState.randomData));
   };
 
+  const handle10Click = () => {
+    let currentText: string = text;
+    for (let i: number = 0; i < 10; i++) {
+      currentText = currentText.concat(getRandom(gameState.randomData));
+      if (currentText.endsWith(gameState.clearCheck)) {
+        setClear(true);
+        setText(`${currentText} ${gameState.clearText}`);
+        return;
+      }
+    }
+    setText(currentText);
+  };
+
   const handleReset = () => {
     setText("");
     setClear(false);
@@ -69,6 +82,7 @@ const App: React.FC = () => {
       </div>
       <div>
         <button onClick={handleClick} disabled={clear} >{gameState.clearCheck + "ボタン"}</button>
+        <button onClick={handle10Click} disabled={clear} >{`${gameState.clearCheck}10連ボタン`}</button>
         <button onClick={handleReset} >リセット</button>
         <div>{text}</div>
       </div>
