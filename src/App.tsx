@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { TwitterIcon, TwitterShareButton } from "react-share";
 
 const App: React.FC = () => {
   const [text, setText] = useState("");
@@ -71,6 +72,9 @@ const App: React.FC = () => {
         <button onClick={handleClick} disabled={clear} >{gameState.clearCheck + "ボタン"}</button>
         <button onClick={handleReset} >リセット</button>
         <div>{text}</div>
+        <TwitterShareButton　title={text} url={window.location.origin} disabled={!clear}>
+          <TwitterIcon size={32} round />
+        </TwitterShareButton>
       </div>
     </>
   );
