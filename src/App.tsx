@@ -4,9 +4,11 @@ import { TwitterIcon, TwitterShareButton } from "react-share";
 const App: React.FC = () => {
   const [text, setText] = useState("");
   const [clear, setClear] = useState(false);
+  const [autoPlaying, setAutoPlaying] = useState(false);
 
-  const [randomData, setRandomData] = useState(["あ", "み", "は", "む"]);
-  const [clearCheck, setClearCheck] = useState("あみはむ");
+  const initialData = "あみはむ";
+  const [randomData, setRandomData] = useState(initialData.split(""));
+  const [clearCheck, setClearCheck] = useState(initialData);
   const [clearText, setClearText] = useState("はむぅ！");
   const [gameState, setGameState] = useState({
     randomData,
@@ -26,6 +28,31 @@ const App: React.FC = () => {
       return;
     }
     setText(text + getRandom(gameState.randomData));
+  };
+
+  const sleep = async (second: number) => {
+    return new Promise((resolve: any) => {
+      setTimeout(() => {
+        resolve();
+      }, second * 1000);
+    });
+  };
+
+  const handle10Click = async () => {
+    setAutoPlaying(true);
+
+    let currentText: string = text;
+    for (let i: number = 0; i < 10; i++) {
+      currentText = currentText.concat(getRandom(gameState.randomData));
+      setText(currentText);
+      if (currentText.endsWith(gameState.clearCheck)) {
+        setClear(true);
+        setText(`${currentText} ${gameState.clearText}`);
+        return;
+      }
+      await sleep(0.1);
+    }
+    setAutoPlaying(false);
   };
 
   const handleReset = () => {
@@ -69,7 +96,8 @@ const App: React.FC = () => {
         </button>
       </div>
       <div>
-        <button onClick={handleClick} disabled={clear} >{gameState.clearCheck + "ボタン"}</button>
+        <button onClick={handleClick} disabled={clear || autoPlaying} >{`${gameState.clearCheck}ボタン`}</button>
+        <button onClick={handle10Click} disabled={clear || autoPlaying} >{`${gameState.clearCheck}10連ボタン`}</button>
         <button onClick={handleReset} >リセット</button>
         <div>{text}</div>
         <TwitterShareButton　title={text} url={window.location.origin} disabled={!clear}>
