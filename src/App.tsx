@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const App: React.FC = () => {
   const [text, setText] = useState("");
   const [clear, setClear] = useState(false);
+  const [autoPlaying, setAutoPlaying] = useState(false);
 
   const initialData = "あみはむ";
   const [randomData, setRandomData] = useState(initialData.split(""));
@@ -37,6 +38,8 @@ const App: React.FC = () => {
   };
 
   const handle10Click = async () => {
+    setAutoPlaying(true);
+
     let currentText: string = text;
     for (let i: number = 0; i < 10; i++) {
       currentText = currentText.concat(getRandom(gameState.randomData));
@@ -48,6 +51,7 @@ const App: React.FC = () => {
       }
       await sleep(0.1);
     }
+    setAutoPlaying(false);
   };
 
   const handleReset = () => {
@@ -91,8 +95,8 @@ const App: React.FC = () => {
         </button>
       </div>
       <div>
-        <button onClick={handleClick} disabled={clear} >{`${gameState.clearCheck}ボタン`}</button>
-        <button onClick={handle10Click} disabled={clear} >{`${gameState.clearCheck}10連ボタン`}</button>
+        <button onClick={handleClick} disabled={clear || autoPlaying} >{`${gameState.clearCheck}ボタン`}</button>
+        <button onClick={handle10Click} disabled={clear || autoPlaying} >{`${gameState.clearCheck}10連ボタン`}</button>
         <button onClick={handleReset} >リセット</button>
         <div>{text}</div>
       </div>
