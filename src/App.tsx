@@ -58,6 +58,7 @@ const App: React.FC = () => {
   const handleReset = () => {
     setText("");
     setClear(false);
+    setAutoPlaying(false);
   };
 
   return (
@@ -90,6 +91,7 @@ const App: React.FC = () => {
             });
             setText("");
             setClear(false);
+            setAutoPlaying(false);
           }}
         >
           決定
