@@ -50,7 +50,7 @@ const App: React.FC = () => {
         setText(`${currentText} ${gameState.clearText}`);
         return;
       }
-      await sleep(0.1);
+      await sleep(0.02);
     }
     setAutoPlaying(false);
   };
@@ -100,7 +100,7 @@ const App: React.FC = () => {
         <button onClick={handle10Click} disabled={clear || autoPlaying} >{`${gameState.clearCheck}10連ボタン`}</button>
         <button onClick={handleReset} >リセット</button>
         <div>{text}</div>
-        <TwitterShareButton　title={text} url={window.location.origin} disabled={!clear}>
+        <TwitterShareButton　title={text} url={"https://kjfsm.github.io/react-pages/"} disabled={!clear}>
           <TwitterIcon size={32} round />
         </TwitterShareButton>
       </div>
