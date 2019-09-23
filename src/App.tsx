@@ -61,6 +61,17 @@ const App: React.FC = () => {
     setAutoPlaying(false);
   };
 
+  const pageUrl = "https://kjfsm.github.io/react-pages/";
+  const tweetText = () => {
+    const threshold = 140 - pageUrl.length - clearCheck.length - clearText.length - 5;
+    if (text.length < threshold) {
+      return text;
+    }
+
+    const endLength = text.length - clearCheck.length - clearText.length - 1;
+    return `${text.substr(0, 10)}...この間(${endLength - 10}文字)...${text.substr(endLength)}`;
+  };
+
   return (
     <>
       <div>
@@ -102,7 +113,7 @@ const App: React.FC = () => {
         <button onClick={handle10Click} disabled={clear || autoPlaying} >{`${gameState.clearCheck}10連ボタン`}</button>
         <button onClick={handleReset} >リセット</button>
         <div>{text}</div>
-        <TwitterShareButton　title={text} url={"https://kjfsm.github.io/react-pages/"} disabled={!clear}>
+        <TwitterShareButton　title={tweetText()} url={pageUrl} disabled={!clear}>
           <TwitterIcon size={32} round />
         </TwitterShareButton>
       </div>
