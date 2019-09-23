@@ -113,6 +113,7 @@ const App: React.FC = () => {
         <button onClick={handle10Click} disabled={clear || autoPlaying} >{`${gameState.clearCheck}10連ボタン`}</button>
         <button onClick={handleReset} >リセット</button>
         <div>{text}</div>
+        <div>いま{text.length}文字</div>
         <TwitterShareButton　title={tweetText()} url={pageUrl} disabled={!clear}>
           <TwitterIcon size={32} round />
         </TwitterShareButton>
