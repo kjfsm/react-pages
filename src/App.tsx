@@ -28,17 +28,26 @@ const App: React.FC = () => {
     setText(text + getRandom(gameState.randomData));
   };
 
-  const handle10Click = () => {
+  const sleep = async (second: number) => {
+    return new Promise((resolve: any) => {
+      setTimeout(() => {
+        resolve();
+      }, second * 1000);
+    });
+  };
+
+  const handle10Click = async () => {
     let currentText: string = text;
     for (let i: number = 0; i < 10; i++) {
       currentText = currentText.concat(getRandom(gameState.randomData));
+      setText(currentText);
       if (currentText.endsWith(gameState.clearCheck)) {
         setClear(true);
         setText(`${currentText} ${gameState.clearText}`);
         return;
       }
+      await sleep(0.1);
     }
-    setText(currentText);
   };
 
   const handleReset = () => {
