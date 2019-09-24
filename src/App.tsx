@@ -61,9 +61,9 @@ const App: React.FC = () => {
     setAutoPlaying(false);
   };
 
-  const pageUrl = "https://kjfsm.github.io/react-pages/";
   const tweetText = (): string => {
-    const threshold = 140 - pageUrl.length - clearCheck.length - clearText.length - 5;
+    // 140文字から当たりと当たりのときに出る文字とURL（固定11.5らしい）とスペース5個分（2.5）引いた長さ以上だったら省略する
+    const threshold = 140 - clearCheck.length - clearText.length - 14;
     if (text.length < threshold) {
       return text;
     }
@@ -114,7 +114,7 @@ const App: React.FC = () => {
         <button onClick={handleReset} >リセット</button>
         <div>{text}</div>
         <div>いま{text.length}文字</div>
-        <TwitterShareButton　title={tweetText()} url={pageUrl} disabled={!clear}>
+        <TwitterShareButton　title={tweetText()} url={"https://kjfsm.github.io/react-pages/"} disabled={!clear}>
           <TwitterIcon size={32} round />
         </TwitterShareButton>
       </div>
