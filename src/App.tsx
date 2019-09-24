@@ -62,7 +62,7 @@ const App: React.FC = () => {
   };
 
   const pageUrl = "https://kjfsm.github.io/react-pages/";
-  const tweetText = () => {
+  const tweetText = (): string => {
     const threshold = 140 - pageUrl.length - clearCheck.length - clearText.length - 5;
     if (text.length < threshold) {
       return text;
