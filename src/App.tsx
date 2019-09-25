@@ -1,9 +1,9 @@
-import { ParsedQuery } from "query-string";
+import queryString from "query-string";
 import React, { useState } from "react";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 
 interface AppProps {
-  qs: ParsedQuery<string>;
+  qs: string;
 }
 
 const App: React.FC<AppProps> = (props: AppProps) => {
@@ -11,20 +11,19 @@ const App: React.FC<AppProps> = (props: AppProps) => {
   const [clear, setClear] = useState(false);
   const [autoPlaying, setAutoPlaying] = useState(false);
 
-  const initialData = "あみはむ";
+  const params = queryString.parse(props.qs);
+  const { paramText, paramClearText } = params;
+
+  const initialData = paramText ? paramText.toString() : "あみはむ";
   const [randomData, setRandomData] = useState(initialData.split(""));
   const [clearCheck, setClearCheck] = useState(initialData);
-  const [clearText, setClearText] = useState("はむぅ！");
+
+  const [clearText, setClearText] = useState(paramClearText ? paramClearText.toString() : "はむぅ！");
   const [gameState, setGameState] = useState({
     randomData,
     clearCheck,
     clearText,
   });
-
-  // const parsed = queryString.parse(props.location.search);
-
-  console.log(props.qs);
-  console.log(props.qs.data);
 
   const getRandom = (data: string[]): string => {
     const index = Math.floor(Math.random() * Math.floor(data.length));
