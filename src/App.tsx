@@ -1,7 +1,12 @@
+import { ParsedQuery } from "query-string";
 import React, { useState } from "react";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 
-const App: React.FC = () => {
+interface AppProps {
+  qs: ParsedQuery<string>;
+}
+
+const App: React.FC<AppProps> = (props: AppProps) => {
   const [text, setText] = useState("");
   const [clear, setClear] = useState(false);
   const [autoPlaying, setAutoPlaying] = useState(false);
@@ -15,6 +20,11 @@ const App: React.FC = () => {
     clearCheck,
     clearText,
   });
+
+  // const parsed = queryString.parse(props.location.search);
+
+  console.log(props.qs);
+  console.log(props.qs.data);
 
   const getRandom = (data: string[]): string => {
     const index = Math.floor(Math.random() * Math.floor(data.length));
