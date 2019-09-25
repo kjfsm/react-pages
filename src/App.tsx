@@ -70,6 +70,18 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     setAutoPlaying(false);
   };
 
+  const tweetText = (): string => {
+    // 140文字から当たりと当たりのときに出る文字とURL（固定11.5らしい）とスペース5個分（2.5）引いた長さ以上だったら省略する
+    const threshold = 140 - clearCheck.length - clearText.length - 14;
+    if (text.length < threshold) {
+      return text;
+    }
+
+    const endLength = text.length - clearCheck.length - 1;
+    const displayStrLength = 20;
+    return `${text.substr(0, displayStrLength)}...(この間${endLength - (displayStrLength * 2)}文字)...${text.substr(endLength - displayStrLength)}`;
+  };
+
   return (
     <>
       <div>
@@ -111,7 +123,8 @@ const App: React.FC<AppProps> = (props: AppProps) => {
         <button onClick={handle10Click} disabled={clear || autoPlaying} >{`${gameState.clearCheck}10連ボタン`}</button>
         <button onClick={handleReset} >リセット</button>
         <div>{text}</div>
-        <TwitterShareButton　title={text} url={"https://kjfsm.github.io/react-pages/"} disabled={!clear}>
+        <div>いま{text.length}文字</div>
+        <TwitterShareButton　title={tweetText()} url={"https://kjfsm.github.io/react-pages/"} disabled={!clear}>
           <TwitterIcon size={32} round />
         </TwitterShareButton>
       </div>
