@@ -70,7 +70,7 @@ const App: React.FC = () => {
 
     const endLength = text.length - clearCheck.length - 1;
     const displayStrLength = 20;
-    return `${text.substr(0, displayStrLength)}...この間(${endLength - (displayStrLength * 2)}文字)...${text.substr(endLength - displayStrLength)}`;
+    return `${text.substr(0, displayStrLength)}...(この間${endLength - (displayStrLength * 2)}文字)...${text.substr(endLength - displayStrLength)}`;
   };
 
   return (
