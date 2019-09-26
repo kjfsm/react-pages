@@ -9,8 +9,8 @@ interface AppProps {
 
 const App: React.FC<AppProps> = ({
   initialData = "あみはむ",
-  initialRandomData= "あみはむ".split(""),
-  initialClearText= "はむぅ！",
+  initialRandomData = "あみはむ".split(""),
+  initialClearText = "はむぅ！",
 }: AppProps) => {
   const [text, setText] = useState("");
   const [clear, setClear] = useState(false);
@@ -125,7 +125,11 @@ const App: React.FC<AppProps> = ({
         <button onClick={handleReset} >リセット</button>
         <div>{text}</div>
         <div>いま{text.length}文字</div>
-        <TwitterShareButton　title={tweetText()} url={"https://kjfsm.github.io/react-pages/"} disabled={!clear}>
+        <TwitterShareButton
+          title={tweetText()}
+          url={`https://kjfsm.github.io/react-pages/?data=${encodeURIComponent(clearCheck)}${randomData.map((data) => (`&randomData=${encodeURIComponent(data)}`)).join("")}&clearText=${encodeURIComponent(clearText)}`}
+          disabled={!clear}
+        >
           <TwitterIcon size={32} round />
         </TwitterShareButton>
       </div>
