@@ -1,28 +1,25 @@
-import queryString from "query-string";
 import React, { useState } from "react";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 
 interface AppProps {
-  qs: string;
+  initialData?: string;
+  initialRandomData?: string[];
+  initialClearText?: string;
 }
 
-const App: React.FC<AppProps> = (props: AppProps) => {
+const App: React.FC<AppProps> = ({
+  initialData = "あみはむ",
+  initialRandomData= "あみはむ".split(""),
+  initialClearText= "はむぅ！",
+}: AppProps) => {
   const [text, setText] = useState("");
   const [clear, setClear] = useState(false);
   const [autoPlaying, setAutoPlaying] = useState(false);
 
-  const params = queryString.parse(props.qs);
-  const { paramText, paramRandomData, paramClearText } = params;
-
-  const initialData = paramText ? paramText.toString() : "あみはむ";
-  const initialRandomData = paramRandomData ? paramRandomData : initialData;
-
-  const [randomData, setRandomData] = useState((typeof initialRandomData) === "string"
-                                                ? initialRandomData.toString().split("")
-                                                : initialRandomData as string[]);
+  const [randomData, setRandomData] = useState(initialRandomData);
   const [clearCheck, setClearCheck] = useState(initialData);
 
-  const [clearText, setClearText] = useState(paramClearText ? paramClearText.toString() : "はむぅ！");
+  const [clearText, setClearText] = useState(initialClearText);
   const [gameState, setGameState] = useState({
     randomData,
     clearCheck,
