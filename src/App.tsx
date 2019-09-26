@@ -128,7 +128,7 @@ const App: React.FC<AppProps> = ({
         <div>{text}</div>
         <div>いま{text.length}文字</div>
         <TwitterShareButton
-          title={tweetText()}
+          title={`${tweetText()}\n${gameState.clearCheck}揃えゲーム\n`}
           url={`https://kjfsm.github.io/react-pages/?data=${encodeURIComponent(clearCheck)}${randomData.map((data) => (`&randomData=${encodeURIComponent(data)}`)).join("")}&clearText=${encodeURIComponent(clearText)}`}
           disabled={!clear}
         >
