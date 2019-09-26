@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import { TwitterIcon, TwitterShareButton } from "react-share";
 
-const App: React.FC = () => {
+interface AppProps {
+  initialData?: string;
+  initialRandomData?: string[];
+  initialClearText?: string;
+}
+
+const App: React.FC<AppProps> = ({
+  initialData = "あみはむ",
+  initialRandomData= "あみはむ".split(""),
+  initialClearText= "はむぅ！",
+}: AppProps) => {
   const [text, setText] = useState("");
   const [clear, setClear] = useState(false);
   const [autoPlaying, setAutoPlaying] = useState(false);
 
-  const initialData = "あみはむ";
-  const [randomData, setRandomData] = useState(initialData.split(""));
+  const [randomData, setRandomData] = useState(initialRandomData);
   const [clearCheck, setClearCheck] = useState(initialData);
-  const [clearText, setClearText] = useState("はむぅ！");
+
+  const [clearText, setClearText] = useState(initialClearText);
   const [gameState, setGameState] = useState({
     randomData,
     clearCheck,
