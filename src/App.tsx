@@ -12,10 +12,14 @@ const App: React.FC<AppProps> = (props: AppProps) => {
   const [autoPlaying, setAutoPlaying] = useState(false);
 
   const params = queryString.parse(props.qs);
-  const { paramText, paramClearText } = params;
+  const { paramText, paramRandomData, paramClearText } = params;
 
   const initialData = paramText ? paramText.toString() : "あみはむ";
-  const [randomData, setRandomData] = useState(initialData.split(""));
+  const initialRandomData = paramRandomData ? paramRandomData : initialData;
+
+  const [randomData, setRandomData] = useState((typeof initialRandomData) === "string"
+                                                ? initialRandomData.toString().split("")
+                                                : initialRandomData as string[]);
   const [clearCheck, setClearCheck] = useState(initialData);
 
   const [clearText, setClearText] = useState(paramClearText ? paramClearText.toString() : "はむぅ！");
