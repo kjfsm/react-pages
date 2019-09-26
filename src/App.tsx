@@ -25,6 +25,7 @@ const App: React.FC<AppProps> = ({
     clearCheck,
     clearText,
   });
+  document.title = `${gameState.clearCheck}揃えゲーム`;
 
   const getRandom = (data: string[]): string => {
     const index = Math.floor(Math.random() * Math.floor(data.length));
@@ -111,6 +112,7 @@ const App: React.FC<AppProps> = ({
               clearCheck,
               clearText,
             });
+            document.title = `${gameState.clearCheck}揃えゲーム`;
             setText("");
             setClear(false);
             setAutoPlaying(false);
